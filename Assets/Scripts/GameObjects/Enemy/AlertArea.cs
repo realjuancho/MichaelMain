@@ -36,15 +36,15 @@ public class AlertArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CheckTriggerForPlayer(other, PlayerOperation.addPlayer); 
+        CheckTriggerForPlayer(other, PlayerOperation.addPlayer);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        CheckTriggerForPlayer(other, PlayerOperation.removePlayer);  
+        CheckTriggerForPlayer(other, PlayerOperation.removePlayer);
     }
 
-    enum PlayerOperation { addPlayer, removePlayer}
+    enum PlayerOperation { addPlayer, removePlayer }
     void CheckTriggerForPlayer(Collider other, PlayerOperation operation)
     {
         Player player = other.GetComponent<Player>();
@@ -124,7 +124,7 @@ public class AlertArea : MonoBehaviour
         float distanciaMenor = float.MaxValue;
         foreach (Player p in players)
         {
-            if (p.playerState == Common.PlayerState.Playing)
+            if (p.playerState == Common.PlayerState.Jugando)
             {
                 float distanciaPlayer = Vector3.Distance(p.transform.position, posicionReferencia);
                 if (distanciaPlayer < distanciaMenor)
@@ -144,7 +144,7 @@ public class AlertArea : MonoBehaviour
         float distanciaMayor = 0;
         foreach (Player p in players)
         {
-            if (p.playerState == Common.PlayerState.Playing)
+            if (p.playerState == Common.PlayerState.Jugando)
             {
                 float distanciaPlayer = Vector3.Distance(p.transform.position, posicionReferencia);
                 if (distanciaPlayer > distanciaMayor)
@@ -163,7 +163,7 @@ public class AlertArea : MonoBehaviour
         float saludMayor = 0;
         foreach (Player p in players)
         {
-            if (p.playerState == Common.PlayerState.Playing)
+            if (p.playerState == Common.PlayerState.Jugando)
             {
                 float saludPlayer = player.gameObject.GetComponent<Salud>().ValorSalud;
                 if (saludPlayer > saludMayor)
@@ -182,7 +182,7 @@ public class AlertArea : MonoBehaviour
         float saludMenor = int.MaxValue;
         foreach (Player p in players)
         {
-            if (p.playerState == Common.PlayerState.Playing)
+            if (p.playerState == Common.PlayerState.Jugando)
             {
                 float saludPlayer = player.gameObject.GetComponent<Salud>().ValorSalud;
                 if (saludPlayer < saludMenor)
@@ -195,5 +195,5 @@ public class AlertArea : MonoBehaviour
         return player;
     }
 
-   
+
 }

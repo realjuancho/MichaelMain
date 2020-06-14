@@ -22,7 +22,7 @@ public class MalabarEnemigo : MonoBehaviour
 
     private void Update()
     {
-        if (enemigo.enemyState != Common.EnemyState.Dead)
+        if (enemigo.enemyState != Common.EnemyState.Muerto)
         {
             HandleFall();
             HandleJuggle();

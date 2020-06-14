@@ -14,11 +14,12 @@ public class MainAttackPlayer : MonoBehaviour
     public float attackMoveSpeed;
     [Range(0f, 1f)]
     public float attackFallSpeed;
-
+    
     public float DamagePower;
 
-    public AttackCombo[] attackComboNew;
-
+    [Range(0f, 10f)]
+    public float attackReactionPower;
+    public AttackCombo[] attackCombo;
 
     string InputMainAttack;
     Player player;
@@ -31,19 +32,18 @@ public class MainAttackPlayer : MonoBehaviour
     {
         player = GetComponent<Player>();
         playerInputConfiguration = GetComponent<PlayerInputConfiguration>();
-
         touchControl = GameObject.FindObjectOfType<TouchControl>();
-
 
         InitializeInput();
 
         int i = 0;
 
-        foreach (AttackCombo attack in attackComboNew)
+        foreach (AttackCombo attack in attackCombo)
         {
             attack.attackId = i;
             attack.attack.AttackComboOrder = i;
             attack.attackRange = attackRange;
+            attack.attackReactionPower = attackReactionPower;
             i++;
         }
     }
@@ -52,7 +52,7 @@ public class MainAttackPlayer : MonoBehaviour
     {
         switch (player.playerState)
         {
-            case Common.PlayerState.Playing:
+            case Common.PlayerState.Jugando:
                 HandleAttackInput();
                 HandleCurrentAttack();
                 break;
@@ -75,18 +75,20 @@ public class MainAttackPlayer : MonoBehaviour
 
         if (InputAttack)
         {
-            if (!currentAttack)
+            int idCurrentAttack = 0;
+            if (currentAttack)
             {
-                currentAttack = attackComboNew[0].attack;
+                if (!currentAttack.Equals(attackCombo[attackCombo.Length - 1].attack))
+                {
+                    idCurrentAttack = currentAttack.AttackComboOrder + 1;
+                }
             }
-            else if (!currentAttack.Equals(attackComboNew[attackComboNew.Length - 1].attack))
-            {
-                currentAttack = attackComboNew[currentAttack.AttackComboOrder + 1].attack;
-            }
-            else
-                currentAttack = attackComboNew[0].attack;
 
+            currentAttack = attackCombo[idCurrentAttack].attack;
+            currentAttack.attackReaction = attackCombo[idCurrentAttack].attackReaction;
+            currentAttack.attackType = attackCombo[idCurrentAttack].attackType;
             currentAttack.attackRange = attackRange;
+            currentAttack.attackReactionPower = attackReactionPower;
             currentAttack.Damage = DamagePower;
 
             currentAttack.Fire();
@@ -177,13 +179,11 @@ public class MainAttackPlayer : MonoBehaviour
     public class AttackCombo
     {
         public int attackId;
-        public float attackRange;
-
-        [SerializeField]
-        public CameraShake.ShakeType shakeType; 
-
-        [SerializeField]
         public AttackPlayer attack;
+        public Common.MainAttackType attackType;
+        public Common.AttackReaction attackReaction;
+        public float attackRange;
+        public float attackReactionPower;
     }
 
 }

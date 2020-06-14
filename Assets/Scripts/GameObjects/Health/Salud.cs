@@ -47,11 +47,16 @@ public class Salud : MonoBehaviour
             }
         }
 
-        Player player = other.GetComponent<Player>();
-        if(player)
+
+        Player p = gameObject.GetComponent<Player>();
+        if (p)
         {
-            if(player.playerState == Common.PlayerState.Dead)
-                player.GetComponent<Salud>().RestoreHealth();
+            Player player = other.GetComponent<Player>();
+            if (player)
+            {
+                if (player.playerState == Common.PlayerState.Muerto)
+                    player.GetComponent<Salud>().RestoreHealth();
+            }
         }
 	}
 	

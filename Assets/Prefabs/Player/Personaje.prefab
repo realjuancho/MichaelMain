@@ -59,8 +59,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackType: 0
+  attackReaction: 0
+  attackReactionPower: 1
   Damage: 0
-  ShakeType: 0
 --- !u!114 &9747544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,8 +697,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackType: 0
+  attackReaction: 0
+  attackReactionPower: 1
   Damage: 0
-  ShakeType: 0
 --- !u!114 &1054199489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1289,8 +1291,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackType: 0
+  attackReaction: 0
+  attackReactionPower: 1
   Damage: 0
-  ShakeType: 0
 --- !u!114 &1485520622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2225,6 +2228,7 @@ MonoBehaviour:
   moveSpeed: 6
   rotateSpeed: 6
   DebugMovePlayer: 0
+  DeadZone: 0.2
 --- !u!114 &8771772942306254039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2257,27 +2261,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackButtonName: Attack
-  attackRange: 0.75
+  attackRange: 1
   attackMoveSpeed: 0.5
   attackFallSpeed: 0.9
   DamagePower: 10
-  attackComboNew:
+  attackReactionPower: 5
+  attackCombo:
   - attackId: 0
-    attackRange: 0
-    shakeType: 2
     attack: {fileID: 8771772942999794422}
-  - attackId: 0
+    attackType: 0
+    attackReaction: 0
     attackRange: 0
-    shakeType: 2
-    attack: {fileID: 9747541}
+    attackReactionPower: 10.54
   - attackId: 0
+    attack: {fileID: 8771772942999794422}
+    attackType: 0
+    attackReaction: 0
     attackRange: 0
-    shakeType: 1
+    attackReactionPower: 0
+  - attackId: 0
     attack: {fileID: 1485520619}
-  - attackId: 0
+    attackType: 0
+    attackReaction: 0
     attackRange: 0
-    shakeType: 0
+    attackReactionPower: 0
+  - attackId: 0
     attack: {fileID: 1054199486}
+    attackType: 0
+    attackReaction: 1
+    attackRange: 0
+    attackReactionPower: 0
 --- !u!114 &34390821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,8 +2604,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackType: 0
+  attackReaction: 0
+  attackReactionPower: 1
   Damage: 0
-  ShakeType: 0
 --- !u!114 &8771772942999794421
 MonoBehaviour:
   m_ObjectHideFlags: 0

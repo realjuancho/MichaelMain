@@ -36,7 +36,7 @@ public class ButtonController : MonoBehaviour
 
     public void ReleaseButton()
     {
-        buttonAnimator.SetBool("push", true);
+        buttonAnimator.SetBool("push", false);
 
         button = false;
         buttonDown = false;

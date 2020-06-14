@@ -22,17 +22,17 @@ public class Player : MonoBehaviour
 	private void Update()
 	{
         if (health.ValorSalud <= 0)
-            playerState = Common.PlayerState.Dead;
+            playerState = Common.PlayerState.Muerto;
         else
-            playerState = Common.PlayerState.Playing;
+            playerState = Common.PlayerState.Jugando;
         
         switch(playerState)
         {
-            case Common.PlayerState.Playing:
+            case Common.PlayerState.Jugando:
                 break;
-            case Common.PlayerState.Dead:
+            case Common.PlayerState.Muerto:
                 break;
-            case Common.PlayerState.WaitingForRespawn:
+            case Common.PlayerState.EsperandoARevivir:
                 break;
         }
 	}

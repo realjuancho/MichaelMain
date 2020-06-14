@@ -6,21 +6,22 @@ using UnityEngine;
 public static class Common
 {
     public enum PlayerId { TouchPlayer, Player1, Player2, Player3, Player4 }
-    public enum PlayerState { Playing, WaitingForRespawn, Down, Dead }
+    public enum PlayerState { Jugando, EsperandoARevivir, Caido, Muerto }
 
 
     public enum PlayerInputButton { L1_Button, L2_Button, L3_Button, R1_Button, R2_Button, R3_Button, DPad_Up, DPad_Down, DPad_Left, DPad_Right, Square_Button, Cross_Button, Triangle_Button, Circle_Button, Share_Button, Options_Button, PS_Button, TouchPad_Button  }
     public enum PlayerInputAxis { DPad, LStick, RStick }
 
     public enum MainAttackType { Light, Medium, Fierce }
+    public enum AttackReaction { Juggle, Pushback }
 
     public static int LightDamage = 10;
     public static int MediumDamage = 20;
     public static int HeavyDamage = 40;
 
 
-    public enum EnemyState { Active, Inactive, Dead, Juggle }
-    public enum EnemyType { Cannon, Chaser, Exploder }
+    public enum EnemyState { Activo, Inactivo, Muerto, Juggle }
+    public enum EnemyType { Cannon, Perseguidor, Exploder }
     public enum EnemyPriority { JugadorMasDebil, JugadorMasSano, JugadorMasLejano, JugadorMasCercano, Random }
 
 

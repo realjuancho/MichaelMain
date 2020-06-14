@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ComportamientoEnemigo : MonoBehaviour
 {
-    [Range(0.1f, 1f)]
+    [Range(0.1f, 10f)]
     public float moveSpeed = 0.5f;
     [Range(0.1f, 1f)]
     public float rotateSpeed = 0.5f;
@@ -36,7 +36,7 @@ public class ComportamientoEnemigo : MonoBehaviour
         {
             foreach (Common.EnemyType e in enemyTypes)
             {
-                if (e == Common.EnemyType.Chaser)
+                if (e == Common.EnemyType.Perseguidor)
                     ChasePlayer();
             }
         }
@@ -45,7 +45,7 @@ public class ComportamientoEnemigo : MonoBehaviour
     void ChasePlayer()
     {
 
-        if (parentEnemy.enemyState == Common.EnemyState.Active)
+        if (parentEnemy.enemyState == Common.EnemyState.Activo)
         {
             //Move towards Player
             Vector3 targetPosition = parentEnemy.targetPlayer.transform.position;

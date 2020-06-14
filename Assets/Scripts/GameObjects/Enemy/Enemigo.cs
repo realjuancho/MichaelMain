@@ -46,13 +46,13 @@ public class Enemigo : MonoBehaviour
 
         if (health.ValorSalud <= 0)
         {
-            enemyState = Common.EnemyState.Dead;
+            enemyState = Common.EnemyState.Muerto;
         }
 
         switch(enemyState)
         {
 
-            case Common.EnemyState.Dead:
+            case Common.EnemyState.Muerto:
                 if(EventSystemManager.enemyEvents) EventSystemManager.enemyEvents.OnEnemyKill();
                 EnemyKilled();
                 break;
@@ -62,7 +62,7 @@ public class Enemigo : MonoBehaviour
                 {
                     if (characterController.isGrounded && health.ValorSalud > 0)
                     {
-                        enemyState = Common.EnemyState.Active;
+                        enemyState = Common.EnemyState.Activo;
                     }
                 }
                 break;
@@ -84,7 +84,7 @@ public class Enemigo : MonoBehaviour
 
     void HandlePlayer()
     {
-        if (enemyState == Common.EnemyState.Active)
+        if (enemyState == Common.EnemyState.Activo)
         {
             if (targetPlayer)
             {

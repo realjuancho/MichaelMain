@@ -8,26 +8,24 @@ public class AttackPlayer : MonoBehaviour
 
     public float attackRange;
     public float coolDownTime = 1;
-    public float coolDownTimeRate = 1;
+    public float coolDownTimeRate = 1f;
     public bool DebugAttack = false;
     public LayerMask enemyLayers;
     public Common.MainAttackType attackType;
+    public Common.AttackReaction attackReaction;
+    public float attackReactionPower = 1f;
     public float Damage;
-    public CameraShake.ShakeType ShakeType;
 
 
     float coolDown;
     Bezier bezier;
     bool AttackFired;
     bool cancel;
-  
     float currentStep;
 
     TrailRenderer trailRenderer;
     LineRenderer lineRenderer;
-
     CameraShake cameraShake;
-
 
     void Awake()
     {
@@ -110,18 +108,46 @@ public class AttackPlayer : MonoBehaviour
                     if (health)
                     {
                         health.TakeDamage(pointDamage);
-
-                        
                     }
 
-                    MalabarEnemigo malabarEnemigo = enemigo.GetComponent<MalabarEnemigo>();
+                    switch (attackReaction)
+                    {
+                        case Common.AttackReaction.Juggle:
+                            MalabarEnemigo malabarEnemigo = enemigo.GetComponent<MalabarEnemigo>();
+                            if (malabarEnemigo)
+                                malabarEnemigo.AddJuggle(pointDamage * attackReactionPower);
+                            break;
 
-                    if(malabarEnemigo)
-                        malabarEnemigo.AddJuggle(attackRange);
+                        case Common.AttackReaction.Pushback:
+                            Pushback pushback = enemigo.GetComponent<Pushback>();
+                            if (pushback)
+                            {
+                                pushback.AddPushback(pointDamage * attackReactionPower, transform.position);
+                            }
+                            break;
+                    }
 
+                    Debug.Log(attackReaction.ToString());
+                    
 
                     if (cameraShake)
                     {
+                        CameraShake.ShakeType ShakeType;
+                        switch (attackType)
+                        {
+                            case Common.MainAttackType.Light:
+                                ShakeType = CameraShake.ShakeType.Light;
+                                    break;
+                            case Common.MainAttackType.Medium:
+                                ShakeType = CameraShake.ShakeType.Medium;
+                                break;
+                            case Common.MainAttackType.Fierce:
+                                ShakeType = CameraShake.ShakeType.Strong;
+                                break;
+                            default:
+                                ShakeType = CameraShake.ShakeType.Medium;
+                                break;
+                        }
                         cameraShake.RequestShake(pointDamage, ShakeType);
                     }
                 }

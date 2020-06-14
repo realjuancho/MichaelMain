@@ -12,7 +12,7 @@ public class JumpPlayer : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
     public int jumpCount = 2;
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     public float airMoveSpeed = 0.5f;
 
     public bool debugJump;
@@ -56,9 +56,9 @@ public class JumpPlayer : MonoBehaviour
     void Update()
     {
 
-        switch(player.playerState)
+        switch (player.playerState)
         {
-            case Common.PlayerState.Playing:
+            case Common.PlayerState.Jugando:
                 HandleJump();
                 HandleFall();
                 break;
@@ -68,7 +68,7 @@ public class JumpPlayer : MonoBehaviour
 
     void InitializeInput()
     {
-        
+
         if (player.playerId != Common.PlayerId.TouchPlayer)
         {
             switch (player.playerId)
@@ -88,7 +88,7 @@ public class JumpPlayer : MonoBehaviour
                     break;
             }
 
-            switch(playerInputConfiguration.JumpButton)
+            switch (playerInputConfiguration.JumpButton)
             {
                 case Common.PlayerInputButton.Circle_Button:
                     inputJump += Common.Hash.Circle_Button_Suffix;
@@ -169,9 +169,9 @@ public class JumpPlayer : MonoBehaviour
 
         //Factor in attack fall speed requires MainAttackPlayer component;
         float fallSpeedFactor = 1;
-        if(attack)
+        if (attack)
         {
-            if(attack.IsAttacking())
+            if (attack.IsAttacking())
             {
                 fallSpeedFactor *= attack.attackFallSpeed;
             }
@@ -188,7 +188,7 @@ public class JumpPlayer : MonoBehaviour
             jumpCount = maxJumpCount;
         }
 
-        if(IsGrounded)
+        if (IsGrounded)
         {
             controller.slopeLimit = slopeLimit;
         }

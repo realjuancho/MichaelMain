@@ -46,7 +46,7 @@ public class FollowPlayerCamera : MonoBehaviour
         List<Vector3> targets = new List<Vector3>();
         foreach (Player player in players)
         {
-            if (player.playerState == Common.PlayerState.Playing)
+            if (player.playerState == Common.PlayerState.Jugando)
             {
                 targets.Add(player.transform.position);
             }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovePlayer : MonoBehaviour
 {
 
-    [Range (1f,10f)]
+    [Range (1f,20f)]
     public float moveSpeed = 6.0f;
     public float rotateSpeed = 1.0f;
 
@@ -22,7 +22,6 @@ public class MovePlayer : MonoBehaviour
     CharacterController controller;
 
     TouchControl touchControl;
-
 
     JumpPlayer jump;
     MainAttackPlayer attack;
@@ -51,7 +50,13 @@ public class MovePlayer : MonoBehaviour
     {
         CheckInput();
         CheckMove();
+
+        GetForwardMovement();
     }
+
+
+    
+
 
     void InitializeInput()
     {
@@ -95,7 +100,7 @@ public class MovePlayer : MonoBehaviour
 
     void CheckInput()
     {
-        if (player.playerState == Common.PlayerState.Playing)
+        if (player.playerState == Common.PlayerState.Jugando)
         {
 
             float x = 0;
@@ -143,6 +148,10 @@ public class MovePlayer : MonoBehaviour
 
                 transform.rotation = Quaternion.LookRotation(newDirection);
             }
+            else
+            {
+                moveInput = 0;
+            }
 
                
         }
@@ -171,15 +180,21 @@ public class MovePlayer : MonoBehaviour
         moveSpeed = maxMoveSpeed * speedFactor;
     }
 
-
     void PlayerMove(Vector3 direccionMovimiento)
     {
-        float realMoveSpeed = moveSpeed;
 
         controller.Move(
             direccionMovimiento
-            * (realMoveSpeed * moveInput)
-            * Time.deltaTime);
+            * (moveSpeed * moveInput
+            * Time.deltaTime)
+            );
+    }
+
+ 
+    public float GetForwardMovement()
+    {
+        float forwardMovement = moveSpeed * moveInput / maxMoveSpeed;
+        return forwardMovement;
     }
 
 

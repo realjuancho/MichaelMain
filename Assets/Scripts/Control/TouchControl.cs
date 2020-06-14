@@ -240,7 +240,10 @@ public class TouchControl : MonoBehaviour
 
             foreach (ButtonController b in buttons)
             {
-                b.ReleaseButton();
+                if (b.GetButton() || b.GetButtonDown())
+                {
+                    b.ReleaseButton();
+                }
             }
         }
     }
